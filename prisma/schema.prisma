@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Exercise {
+  id           Int      @id @default(autoincrement())
+  uuid         String   @unique @default(uuid())
+  name         String
+  body_part    BodyPart @relation(fields: [body_part_id], references: [id])
+  body_part_id Int
+
+  craeted_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  is_deleted Boolean   @default(false)
+  deleted_at DateTime?
+}
+
+model BodyPart {
+  id                    Int              @id @default(autoincrement())
+  uuid                  String           @unique @default(uuid())
+  name                  String
+  exercises             Exercise[]
+  body_part_category    BodyPartCategory @relation(fields: [body_part_category_id], references: [id])
+  body_part_category_id Int
+}
+
+model BodyPartCategory {
+  id        Int        @id @default(autoincrement())
+  uuid      String     @unique @default(uuid())
+  name      String
+  body_part BodyPart[]
+}

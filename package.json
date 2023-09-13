@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.50",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.2.0",
+    "elysia": "latest",
+    "prisma": "^5.2.0"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "latest",
+    "bun-types": "latest"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "module": "src/index.js"
+}
